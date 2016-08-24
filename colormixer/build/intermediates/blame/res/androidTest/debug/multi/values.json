@@ -1,0 +1,102 @@
+[
+    {
+        "outputFile": "D:\\Documents\\Stuff\\Projects\\SLamp\\colormixer\\build\\intermediates\\res\\merged\\androidTest\\debug\\values\\values.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 168,
+                    "endColumn": 50,
+                    "endOffset": 214
+                },
+                "from": {
+                    "file": "D:\\Documents\\Stuff\\Projects\\SLamp\\colormixer\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 168,
+                        "endColumn": 50,
+                        "endOffset": 214
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 4,
+                    "startColumn": 4,
+                    "startOffset": 219,
+                    "endColumn": 57,
+                    "endOffset": 272
+                },
+                "from": {
+                    "file": "D:\\Documents\\Stuff\\Projects\\SLamp\\colormixer\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 219,
+                        "endColumn": 57,
+                        "endOffset": 272
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 5,
+                    "startColumn": 4,
+                    "startOffset": 277,
+                    "endColumn": 51,
+                    "endOffset": 324
+                },
+                "from": {
+                    "file": "D:\\Documents\\Stuff\\Projects\\SLamp\\colormixer\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 4,
+                        "startOffset": 277,
+                        "endColumn": 51,
+                        "endOffset": 324
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 6,
+                    "startColumn": 4,
+                    "startOffset": 329,
+                    "endColumn": 49,
+                    "endOffset": 374
+                },
+                "from": {
+                    "file": "D:\\Documents\\Stuff\\Projects\\SLamp\\colormixer\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 4,
+                        "startOffset": 329,
+                        "endColumn": 49,
+                        "endOffset": 374
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 7,
+                    "startColumn": 4,
+                    "startOffset": 379,
+                    "endColumn": 51,
+                    "endOffset": 426
+                },
+                "from": {
+                    "file": "D:\\Documents\\Stuff\\Projects\\SLamp\\colormixer\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 7,
+                        "startColumn": 4,
+                        "startOffset": 379,
+                        "endColumn": 51,
+                        "endOffset": 426
+                    }
+                }
+            }
+        ]
+    }
+]

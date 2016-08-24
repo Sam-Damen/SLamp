@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="D:\Documents\Stuff\Projects\SLamp\colormixer\assets"/><source path="D:\Documents\Stuff\Projects\SLamp\colormixer\build\generated\assets\shaders\debug"/></dataSet><dataSet config="debug"><source path="D:\Documents\Stuff\Projects\SLamp\colormixer\build-types\debug\assets"/></dataSet></merger>
