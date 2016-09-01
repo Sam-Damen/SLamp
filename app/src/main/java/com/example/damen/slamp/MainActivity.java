@@ -147,6 +147,7 @@ public class MainActivity extends AppCompatActivity {
 
                             //Create data packet with alarm time
                             //TODO!
+                            //test
 
 
                         } else {
@@ -176,8 +177,8 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.partySwitch:
                     if (isChecked) {
-                        //TODO Send flag to Photon to Randomise colours
-
+                        //Send party Mode to Orb
+                        setColor(0, 0, 0, "1", "24", 3);
 
                         if (!enableSwitch.isChecked()) {
                             sendPrefs(getApplicationContext(), "enable", true);
