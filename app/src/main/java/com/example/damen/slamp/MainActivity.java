@@ -32,6 +32,7 @@ import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
 import java.net.UnknownHostException;
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -143,12 +144,18 @@ public class MainActivity extends AppCompatActivity {
                         if (alarmManager.getNextAlarmClock() != null) {
                             nextAlarm = alarmManager.getNextAlarmClock().getTriggerTime();
                             sendPrefs(getApplicationContext(), "alarm", true);
-                            Toast.makeText(getApplicationContext(),Long.toString(nextAlarm), Toast.LENGTH_SHORT).show();
 
                             //Create data packet with alarm time
                             //TODO!
-                            //test
+                            //Convert to minutes
+                            nextAlarm = nextAlarm / 60000;
+                            //break up into 3 bytes to send
+                            byte lsd = (byte) (nextAlarm & 0xFF);
+                            byte misd = (byte) ((nextAlarm >> 8) & 0xFF);
+                            byte msd = (byte) ((nextAlarm >> 16) & 0xFF);
+                            setColor(lsd, misd, msd, "1", "24", 5);
 
+                            Toast.makeText(getApplicationContext(),Long.toString(nextAlarm), Toast.LENGTH_SHORT).show();
 
                         } else {
                             Toast.makeText(getApplicationContext(), "No Alarm Set", Toast.LENGTH_SHORT).show();
@@ -230,10 +237,8 @@ public class MainActivity extends AppCompatActivity {
 
                     //Toggle the switches if we change the colour mixer
                     if (colourSwitch.isChecked()) {
-                        Log.i("ENABLE BUG", "here");
                         sendPrefs(getApplicationContext(), "colour", false);
                     } else {
-                        Log.i("ENABLE BUG", "there");
                         sendPrefs(getApplicationContext(), "enable", true);
                     }
                     if (partySwitch.isChecked()) {
