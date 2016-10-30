@@ -33,8 +33,11 @@ import java.net.InetAddress;
 import java.net.MulticastSocket;
 import java.net.UnknownHostException;
 import java.nio.ByteBuffer;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 //TODO - Write Help, Alarm Data Packet, Bug Fix
 
@@ -62,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
     SwitchCompat daylightSwitch = null;
     SwitchCompat colourSwitch = null;
     SwitchCompat partySwitch = null;
-    ImageView refreshButton = null;
 
     //Shared Preferences (Global States)
     SharedPreferences prefs;
@@ -70,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
 
     //Alarm variables
     private static long nextAlarm;
+    private static byte eMsd;
 
 
 
@@ -104,8 +107,6 @@ public class MainActivity extends AppCompatActivity {
         colourSwitch.setOnCheckedChangeListener(switchListener);
         partySwitch = (SwitchCompat) findViewById(R.id.partySwitch);
         partySwitch.setOnCheckedChangeListener(switchListener);
-        refreshButton = (ImageView) findViewById(R.id.refreshButton);
-        refreshButton.setOnClickListener(buttonListener);
 
         setSwitches();
 
@@ -143,6 +144,10 @@ public class MainActivity extends AppCompatActivity {
                         AlarmManager alarmManager = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
                         if (alarmManager.getNextAlarmClock() != null) {
                             nextAlarm = alarmManager.getNextAlarmClock().getTriggerTime();
+                            //Print out time of the alarm
+                            SimpleDateFormat sdf = new SimpleDateFormat("EEE h:mm a");
+                            sdf.setTimeZone(TimeZone.getDefault());
+                            Toast.makeText(getApplicationContext(),sdf.format(new Date(nextAlarm)), Toast.LENGTH_SHORT).show();
                             sendPrefs(getApplicationContext(), "alarm", true);
 
                             //Create data packet with alarm time
@@ -153,9 +158,8 @@ public class MainActivity extends AppCompatActivity {
                             byte lsd = (byte) (nextAlarm & 0xFF);
                             byte misd = (byte) ((nextAlarm >> 8) & 0xFF);
                             byte msd = (byte) ((nextAlarm >> 16) & 0xFF);
+                            eMsd = (byte) ((nextAlarm >> 24) & 0xFF);
                             setColor(lsd, misd, msd, "1", "24", 5);
-
-                            Toast.makeText(getApplicationContext(),Long.toString(nextAlarm), Toast.LENGTH_SHORT).show();
 
                         } else {
                             Toast.makeText(getApplicationContext(), "No Alarm Set", Toast.LENGTH_SHORT).show();
@@ -163,6 +167,8 @@ public class MainActivity extends AppCompatActivity {
 
 
                     } else {
+                        //Toggle off the alarm (on photon)
+                        setColor(0, 0, 0, "1", "24", 5);
                         sendPrefs(getApplicationContext(), "alarm", false);
                     }
                     break;
@@ -198,26 +204,6 @@ public class MainActivity extends AppCompatActivity {
 
             //Update the switches after changes
             setSwitches();
-        }
-    };
-
-
-
-    //Sync Alarm Button listener
-    Button.OnClickListener buttonListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            //Animation
-            Animation rotate = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.clockwise_360);
-            //Syncing the alarms enables the function
-            refreshButton.startAnimation(rotate);
-            AlarmManager alarmManager = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
-            if (alarmManager.getNextAlarmClock() != null) {
-                sendPrefs(getApplicationContext(), "alarm", true);
-                setSwitches();
-            } else {
-                Toast.makeText(getApplicationContext(), "No Alarm Set", Toast.LENGTH_SHORT).show();
-            }
         }
     };
 
@@ -354,7 +340,12 @@ public class MainActivity extends AppCompatActivity {
                         bytes[3] = (byte) cCommandOption;
 
                         // Orb ID
-                        bytes[4] = Byte.parseByte(orb);
+                        //Add extra data in when sending epoch time
+                        if (cCommandOption == 5) {
+                            bytes[4] = eMsd;
+                        } else {
+                            bytes[4] = Byte.parseByte(orb);
+                        }
 
                         // RED / GREEN / BLUE
                         bytes[5] = (byte) cRed;

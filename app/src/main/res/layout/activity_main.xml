@@ -35,35 +35,7 @@
 
         android:text="Daylight Alarm"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:layout_marginTop="20dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:textColor="@color/white"
-            android:text="@string/syncAlarm" />
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
-        <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/refreshButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_refresh"
-            android:layout_marginRight="15dp" />
-
-
-    </LinearLayout>
 
     <android.support.v7.widget.SwitchCompat
         android:id="@+id/daylightColSwitch"
